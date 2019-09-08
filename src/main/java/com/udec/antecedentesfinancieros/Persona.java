@@ -5,11 +5,13 @@
  */
 package com.udec.antecedentesfinancieros;
 
+import java.io.Serializable;
+
 /**
  *
  * @author michl
  */
-public class Persona {
+public class Persona implements Serializable {
 
     private String apellido;
     private String nombre;

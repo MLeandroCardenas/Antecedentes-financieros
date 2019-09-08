@@ -5,6 +5,10 @@
  */
 package com.udec.antecedentesfinancieros;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,6 +21,7 @@ public class Logica {
     
     Persona persona;
     HashMap<Long,Persona> usuario;
+    HashMap<Long,Persona> usuariosRecuperados;
     Scanner teclado;
     byte opcion;
     
@@ -142,5 +147,28 @@ public class Logica {
         
         usuario.replace(cedula, persona);
         System.out.println("ACTUALIZADO CORRECTAMENTE");
+        menuUsuario();
+    }
+    
+    private void serializar(){
+        try{
+            ObjectOutputStream serializando = new ObjectOutputStream(new FileOutputStream("C:\\Users\\michl\\OneDrive\\Documentos\\NetBeansProjects\\AntecedentesFinancieros\\src\\datos.txt"));
+            serializando.writeObject(usuario);
+            serializando.close();
+            
+        }catch(Exception ex){
+            
+        }
+    }
+    
+    private void deserializar(){
+        usuariosRecuperados = new HashMap<>();
+        try{
+            ObjectInputStream recuperar = new ObjectInputStream(new FileInputStream("C:\\Users\\michl\\OneDrive\\Documentos\\NetBeansProjects\\AntecedentesFinancieros\\src\\datos.txt"));
+            usuariosRecuperados = (HashMap<Long,Persona>)recuperar.readObject();
+            recuperar.close();   
+        }catch(Exception ex){
+            
+        }
     }
 }
