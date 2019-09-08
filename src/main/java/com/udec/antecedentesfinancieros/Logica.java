@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,7 +21,6 @@ public class Logica {
     
     Persona persona;
     HashMap<Long,Persona> usuario;
-    HashMap<Long,Persona> usuariosRecuperados;
     Scanner teclado;
     byte opcion;
     
@@ -47,6 +46,7 @@ public class Logica {
                 }
         }
         imprimir();
+        serializar();
     }
     
     private void registro(){
@@ -63,8 +63,14 @@ public class Logica {
         else persona.setGenero('F');
         System.out.println("Cedula: ");
         persona.setCedula(teclado.nextLong());
-
-        usuario.put(persona.getCedula(),persona);
+        
+        if(usuario.isEmpty()){
+            usuario.put(persona.getCedula(),persona);
+        }else{
+            boolean resultado = validarUsuarios(persona.getCedula());
+            if(resultado==true) System.out.println("El usuario ya existe");
+            if(resultado==false) usuario.put(persona.getCedula(),persona);
+        }
     }
     
     public void imprimir(){
@@ -75,10 +81,13 @@ public class Logica {
     }
     
     private void ingreso(){
+        deserializar();
         if(usuario.isEmpty()){
             System.out.println("DEBE HABER AL MENOS UN USUARIO REGISTRADO");
             menu();
         }
+        
+            persona = new Persona();
             boolean resultado;
             System.out.println("Digite su numero de cedula");
             persona.setCedula(teclado.nextLong());
@@ -106,13 +115,13 @@ public class Logica {
         opcion = teclado.nextByte();
         switch(opcion){
             case 1:
-                registrarAntecedentes();
+                registrarAntecedentes(persona.getCedula());
                 break;
             case 2:
-                eliminarAntecedentes();
+                eliminarAntecedentes(persona.getCedula());
                 break;
             case 3:
-                toString();
+                toString(persona.getCedula());
                 break;
             case 4:
                 editarDatosPersonales(persona.getCedula());
@@ -123,16 +132,15 @@ public class Logica {
         }
     }
     
-    private void registrarAntecedentes(){
+    private void registrarAntecedentes(long cedula){
         
     }
     
-    private void eliminarAntecedentes(){
+    private void eliminarAntecedentes(long cedula){
         
     }
 
-    @Override
-    public String toString() {
+    public String toString(long cedula) {
         return "";
     }
     
@@ -162,10 +170,10 @@ public class Logica {
     }
     
     private void deserializar(){
-        usuariosRecuperados = new HashMap<>();
+       // usuarioRecuperado = new HashMap<>();
         try{
             ObjectInputStream recuperar = new ObjectInputStream(new FileInputStream("C:\\Users\\michl\\OneDrive\\Documentos\\NetBeansProjects\\AntecedentesFinancieros\\src\\datos.txt"));
-            usuariosRecuperados = (HashMap<Long,Persona>)recuperar.readObject();
+            usuario = (HashMap<Long,Persona>)recuperar.readObject();
             recuperar.close();   
         }catch(Exception ex){
             

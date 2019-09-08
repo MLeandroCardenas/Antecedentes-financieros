@@ -13,6 +13,8 @@ import java.io.Serializable;
  */
 public class Persona implements Serializable {
 
+    private static final long serialVersionUID = -2873344211410398459L;
+    
     private String apellido;
     private String nombre;
     private long cedula;
