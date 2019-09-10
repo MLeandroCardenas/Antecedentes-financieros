@@ -6,31 +6,46 @@
 package com.udec.antecedentesfinancieros;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
- * @author michl
+ * @author Michael Cardenas
+ * clase cascaron con los atributos de la persona
  */
 public class Persona implements Serializable {
 
+    /**
+     * serial unico para la serializacion, un identificador
+     */
     private static final long serialVersionUID = -2873344211410398459L;
     
+    /**
+     * atributos de la clase
+     */
     private String apellido;
     private String nombre;
     private long cedula;
     private byte edad;
     private char genero;
-    private TipoAntecedente antecedente;
     
     
+    /**
+     * constructor de la clase
+     */
     public Persona() {
     }
-
+    
+    /**
+     * metodos publicos para acceder a las variables privadas
+     * @return 
+     */
     public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
+    
+    public void setApellido(String apellido) {  
         this.apellido = apellido;
     }
 
@@ -65,17 +80,4 @@ public class Persona implements Serializable {
     public void setGenero(char genero) {
         this.genero = genero;
     }
-
-    public TipoAntecedente getAntecedente() {
-        return antecedente;
-    }
-
-    public void setAntecedente(TipoAntecedente antecedente) {
-        this.antecedente = antecedente;
-    }
-    
-    
-    
-    
-    
 }

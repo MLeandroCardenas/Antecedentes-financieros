@@ -7,9 +7,14 @@ package com.udec.antecedentesfinancieros;
 
 /**
  *
- * @author michl
+ * @author Michael Cardenas
+ * clase donde empieza el programa
  */
 public class Main {
+    /**
+     * metodo donde arranca el programa
+     * @param args 
+     */
     public static void main(String...args){
         Logica logica = new Logica();
         logica.menu();

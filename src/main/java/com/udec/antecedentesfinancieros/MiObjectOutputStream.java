@@ -11,17 +11,30 @@ import java.io.OutputStream;
 
 /**
  *
- * @author michl
+ * @author Michael Cardenas
+ * clase especial para que el archivo se sobreescriba correctamente
  */
 public class MiObjectOutputStream extends ObjectOutputStream {
     
+    /**
+     * si ya hay una cabezera de archivo no la modifique
+     * @throws IOException 
+     */
     protected void writeStreamHeader() throws IOException{
         // No hacer nada.
     }
-    
+    /**
+     * si hay una cabezera que la sobreescriba
+     * @throws IOException 
+     */
     public MiObjectOutputStream () throws IOException{
         super();
     }
+    /**
+     * se encarga de serializar el archivo correctamente
+     * @param out
+     * @throws IOException 
+     */
     public MiObjectOutputStream(OutputStream out) throws IOException{
                 super(out);
         }
